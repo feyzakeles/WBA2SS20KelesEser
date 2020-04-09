@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/feyzakeles/WBA2SS20KelesEser/issues"
   },
-  "homepage": "https://github.com/feyzakeles/WBA2SS20KelesEser#readme"
+  "homepage": "https://github.com/feyzakeles/WBA2SS20KelesEser#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
