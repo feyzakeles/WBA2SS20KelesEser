@@ -1,0 +1,43 @@
+[
+    {
+      "id": 1,
+      "vorname": "Peter",
+      "nachname": "Parker",
+      "angebote": [
+        {
+          "start": "Bonn",
+          "ziel": "Aachen"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "vorname": "Feyza",
+      "nachname": "Keles",
+      "auto": "Honda",
+      "angebote": [
+        {
+          "start": "Hannover",
+          "ziel": "Aachen"
+        },
+        {
+          "start": "Bonn",
+          "ziel": "Berlin"
+        },
+        {}
+      ]
+    },
+    {
+      "id": 3,
+      "vorname": "Merve",
+      "nachname": "Eser",
+      "auto": "Honda",
+      "angebote": [
+        {
+          "start": "Bochum",
+          "ziel": "Hannover"
+        },
+        {}
+      ]
+    }
+  ]
