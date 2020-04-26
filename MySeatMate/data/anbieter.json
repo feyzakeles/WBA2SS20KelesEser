@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "vorname": "Peter",
+    "nachname": "Parker",
+    "angebote": [
+      {}
+    ]
+  },
+  {
+    "id": 2,
+    "vorname": "Feyza",
+    "nachname": "Keles"
+  },
+  {
+    "id": 3,
+    "vorname": "Merve",
+    "nachname": "Eser"
+  }
+]
