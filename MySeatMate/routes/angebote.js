@@ -2,7 +2,7 @@ var express = require('express');
 var app = express.Router();
 var controller = require('../controller/angebote');
 
-app.get('/mitfahrer/:id', controller.getAngebote);
+// app.get('/mitfahrer/:id', controller.getAngebote);
 
 app.post('/anbieter/:id/angebote', controller.postAngebote);
 

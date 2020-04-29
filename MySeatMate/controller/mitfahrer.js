@@ -19,7 +19,7 @@ const writeFile = (fileData, callback, filePath = dataPath, encoding = 'utf8') =
     });
 };
 
-//GET Einen bestimmten Anbieter aufrufen
+//GET Einen bestimmten Mitfahrer aufrufen
 function getMitfahrer(req, res) {
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
@@ -39,7 +39,7 @@ function getMitfahrer(req, res) {
     });
 };
 
-//POST Neuen Anbieter erstellen
+//POST Neuen Mitfahrer erstellen
 function postMitfahrer(req, res){
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
@@ -75,7 +75,7 @@ function postMitfahrer(req, res){
     });
 };
 
-//PUT Anbieter Einstellungen ändern
+//PUT Mitfahrer Einstellungen ändern
 function putMitfahrer(req, res){
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
@@ -87,7 +87,7 @@ function putMitfahrer(req, res){
     });
 };
 
-//DELETE Anbieter löschen
+//DELETE Mitfahrer löschen
 function deleteMitfahrer(req, res){
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
