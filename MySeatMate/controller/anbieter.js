@@ -1,5 +1,7 @@
 
 const dataPath = './data/anbieter.json';
+var angebotfunction = require('./angebote.js');
+
 var fs = require('fs');
 module.exports = {
     getAnbieter,
@@ -60,6 +62,7 @@ function postAnbieter(req, res){
             id: neueId,
             vorname: req.body.vorname,
             nachname: req.body.nachname,
+            angebote: [angebotfunction.postAngebote]
         };
         for(var index = 0; index < a.length; index++){
             if(a[index].vorname == newAnbieter.vorname && a[index].nachname == newAnbieter.nachname){
@@ -70,7 +73,7 @@ function postAnbieter(req, res){
         a.push(newAnbieter);
 
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('new user added');
+            res.status(201).send('Neue User wurde erstellt!!');
         });
     });
 };
@@ -104,8 +107,14 @@ function deleteAnbieter(req, res){
         if (err) {
             throw err;
         }
+        var userid = parseInt(req.params.id);
+        var a = JSON.parse(data);
+        a = a.filter(function(del) {
+			return del.id != userid
+		});
+
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('new user added');
+            res.status(200).send('Der Anbieter mit der ID ' + userid + ' wurde gelöscht ');
         });
     });
 };

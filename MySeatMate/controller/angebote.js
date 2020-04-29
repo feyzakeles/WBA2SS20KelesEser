@@ -1,8 +1,8 @@
 
 const dataPath = './data/anbieter.json';
 var fs = require('fs');
+
 module.exports = {
-    getAngebote,
     postAngebote,
     putAngebote,
     deleteAngebote
@@ -19,63 +19,49 @@ const writeFile = (fileData, callback, filePath = dataPath, encoding = 'utf8') =
     });
 };
 
-//GET Einen bestimmten Anbieter aufrufen
-function getAngebote(req, res) {
+//POST Neue Angebot erstellen
+function postAngebote(req, res){
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
             throw err;
         }
         var userid = parseInt(req.params.id);
         var a = JSON.parse(data);
-        for(var index = 0; index < a.length; index++){
-            if(a[index].id === userid){
-               res.status(200).send(a[index]);
-               return;
+        var letzteID = 0; 
+
+        for (var i in a){
+            if(a[i].id == userid){
+            var u = a[i].angebote;
+            for (var j in u){
+            if (u[j].id > letzteID){
+                letzteID = parseInt(u[j].id);
+                }
+                
             }
         }
-        res.status(500).send({error: "Dieser User ist nicht vorhanden"});
-        // res.send(JSON.parse(data));
-
-    });
-};
-
-//POST Neuen Anbieter erstellen
-function postAngebote(req, res){
-    fs.readFile(dataPath, 'utf8', (err, data) => {
-        if (err) {
-            throw err;
         }
-        var a = JSON.parse(data);
-        var letzteID = 0;
-
-        for (var i in a) {
-			if (a[i].id > letzteID){
-				letzteID = parseInt(a[i].id);
-			}
-        }
-
-        var neueId = letzteID + 1;
+        var neueId = letzteID + 1; 
         
-        var newAnbieter = {
+        var newAngebot = {
             id: neueId,
-            vorname: req.body.vorname,
-            nachname: req.body.nachname,
-        };
-        for(var index = 0; index < a.length; index++){
-            if(a[index].vorname == newAnbieter.vorname && a[index].nachname == newAnbieter.nachname){
-               res.status(500).send({error: "Anbieter existiert bereits!!"});
-               return;
+            startort: req.body.startort,
+            zielort: req.body.zielort,
+        };  
+        
+        for (var i in a) {
+			if (a[i].id == userid){
+                a[i].angebote.push(newAngebot);
+                res.status(201).send(newAngebot);
             }
-          }
-        a.push(newAnbieter);
+        }
 
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('new user added');
+            res.status(500).send({error: "error!!"}); 
         });
     });
 };
 
-//PUT Anbieter Einstellungen ändern
+//PUT Angebot ändern
 function putAngebote(req, res){
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
@@ -87,7 +73,7 @@ function putAngebote(req, res){
     });
 };
 
-//DELETE Anbieter löschen
+//DELETE Angebot löschen
 function deleteAngebote(req, res){
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {

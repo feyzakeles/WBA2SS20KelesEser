@@ -4,17 +4,17 @@
     "vorname": "Peter",
     "nachname": "Parker",
     "angebote": [
-      {}
+      {
+        "id": 1,
+        "startort": "Bonn",
+        "zielort": "Berlin"
+      }
     ]
   },
   {
     "id": 2,
     "vorname": "Feyza",
-    "nachname": "Keles"
-  },
-  {
-    "id": 3,
-    "vorname": "Merve",
-    "nachname": "Eser"
+    "nachname": "Keles",
+    "angebote": []
   }
 ]
