@@ -1,0 +1,29 @@
+[
+    {
+    "preiskategorie1": [
+        {
+        "autoid": 1,
+        "startort": "bonn",
+        "zielort": "Berlin"
+        }
+      ]
+    },
+    {
+    "preiskategorie2": [
+        {
+        "autoid": 1,
+        "startort": "bonn",
+        "zielort": "Berlin"
+        }
+      ]
+    },
+    {
+    "preiskategorie3": [
+        {
+        "autoid": 1,
+        "startort": "bonn",
+        "zielort": "Berlin"
+        }
+      ]
+    }
+  ]

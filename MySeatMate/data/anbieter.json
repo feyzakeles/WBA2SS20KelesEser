@@ -6,15 +6,32 @@
     "angebote": [
       {
         "id": 1,
-        "startort": "Bonn",
+        "startort": "bonn",
         "zielort": "Berlin"
       }
     ]
   },
   {
     "id": 2,
+    "vorname": "Merve",
+    "nachname": "Eser",
+    "angebote": [
+      {
+        "id": 1,
+        "startort": "München",
+        "zielort": "Berlin"
+      }
+    ]
+  },
+  {
+    "id": 3,
     "vorname": "Feyza",
     "nachname": "Keles",
-    "angebote": []
+    "automodell": [
+      null
+    ],
+    "angebote": [
+      null
+    ]
   }
 ]

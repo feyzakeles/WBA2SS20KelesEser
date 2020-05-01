@@ -1,6 +1,7 @@
 
 const dataPath = './data/anbieter.json';
 var angebotfunction = require('./angebote.js');
+var automodellfunction = require('./automodelle.js');
 
 var fs = require('fs');
 module.exports = {
@@ -10,6 +11,7 @@ module.exports = {
     deleteAnbieter
 }
 
+//helper
 const writeFile = (fileData, callback, filePath = dataPath, encoding = 'utf8') => {
 
     fs.writeFile(filePath, fileData, encoding, (err) => {
@@ -35,7 +37,7 @@ function getAnbieter(req, res) {
                return;
             }
         }
-        res.status(500).send({error: "Dieser User ist nicht vorhanden"});
+        res.status(500).send({error: "Dieser Anbieter ist nicht vorhanden"});
         // res.send(JSON.parse(data));
 
     });
@@ -62,6 +64,7 @@ function postAnbieter(req, res){
             id: neueId,
             vorname: req.body.vorname,
             nachname: req.body.nachname,
+            automodell: [automodellfunction.postAutomodell],
             angebote: [angebotfunction.postAngebote]
         };
         for(var index = 0; index < a.length; index++){
@@ -73,7 +76,7 @@ function postAnbieter(req, res){
         a.push(newAnbieter);
 
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('Neue User wurde erstellt!!');
+            res.status(201).send('Neue Anbieter wurde erstellt!!');
         });
     });
 };

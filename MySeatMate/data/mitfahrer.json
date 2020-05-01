@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "vorname": "Peter",
+    "nachname": "Parker"
+  },
+  {
+    "id": 2,
+    "vorname": "Feyza",
+    "nachname": "Keles",
+    "mitfahreranzahl": 1,
+    "gepaeck": 0
+  }
+]

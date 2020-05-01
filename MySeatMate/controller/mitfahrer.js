@@ -56,21 +56,23 @@ function postMitfahrer(req, res){
 
         var neueId = letzteID + 1;
         
-        var newAnbieter = {
+        var newMitfahrer = {
             id: neueId,
             vorname: req.body.vorname,
             nachname: req.body.nachname,
+            mitfahreranzahl: req.body.mitfahreranzahl,
+            gepaeck: req.body.gepaeck
         };
         for(var index = 0; index < a.length; index++){
-            if(a[index].vorname == newAnbieter.vorname && a[index].nachname == newAnbieter.nachname){
+            if(a[index].vorname == newMitfahrer.vorname && a[index].nachname == newMitfahrer.nachname){
                res.status(500).send({error: "Anbieter existiert bereits!!"});
                return;
             }
           }
-        a.push(newAnbieter);
+        a.push(newMitfahrer);
 
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('new user added');
+            res.status(201).send('Neue Mitfahrer wurde erstellt!!');
         });
     });
 };
@@ -81,8 +83,22 @@ function putMitfahrer(req, res){
         if (err) {
             throw err;
         }
+        var userid = parseInt(req.params.id);
+        var a = JSON.parse(data);
+        
+        for (var i in a) {
+			if (a[i].id == userid){
+                a[i].vorname = req.body.vorname;
+                a[i].nachname = req.body.nachname;
+                a[i].mitfahreranzahl = req.body.mitfahreranzahl;
+                a[i].gepaeck = req.body.gepaeck;
+                var neueMitfahrerdaten = a[i];
+                res.status(200).send(neueMitfahrerdaten);
+                return  
+            }   
+        }
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('new user added');
+            res.status(500).send('Dieser Mitfahrer ist nicht vorhanden'); 
         });
     });
 };
@@ -93,8 +109,13 @@ function deleteMitfahrer(req, res){
         if (err) {
             throw err;
         }
+        var userid = parseInt(req.params.id);
+        var a = JSON.parse(data);
+        a = a.filter(function(del) {
+			return del.id != userid
+		});
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('new user added');
+            res.status(200).send('Der Mitfahrer mit der ID ' + userid + ' wurde gelöscht ');
         });
     });
 };

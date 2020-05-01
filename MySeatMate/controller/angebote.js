@@ -8,6 +8,7 @@ module.exports = {
     deleteAngebote
 }
 
+//helper
 const writeFile = (fileData, callback, filePath = dataPath, encoding = 'utf8') => {
 
     fs.writeFile(filePath, fileData, encoding, (err) => {
@@ -23,7 +24,7 @@ const writeFile = (fileData, callback, filePath = dataPath, encoding = 'utf8') =
 function postAngebote(req, res){
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
-            throw err;
+            res.status(500).json(err);
         }
         var userid = parseInt(req.params.id);
         var a = JSON.parse(data);
@@ -51,12 +52,11 @@ function postAngebote(req, res){
         for (var i in a) {
 			if (a[i].id == userid){
                 a[i].angebote.push(newAngebot);
-                res.status(201).send(newAngebot);
-            }
+                
+            } 
         }
-
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(500).send({error: "error!!"}); 
+            res.status(201).send(newAngebot);
         });
     });
 };
@@ -65,10 +65,27 @@ function postAngebote(req, res){
 function putAngebote(req, res){
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
-            throw err;
+            res.status(500).send('error');
+        }
+        var userid = parseInt(req.params.id);
+        var angebotid = parseInt(req.params.aid);
+        var a = JSON.parse(data);
+        
+        for (var i in a) {
+			if (a[i].id == userid){
+                var u = a[i].angebote;
+                for (var j in u) {
+                    if (u[j].id == angebotid){
+                        u[j].startort = req.body.startort;
+                        u[j].zielort = req.body.zielort;
+                        var neueAngebotdaten = u[j];
+                        
+                    }
+                }
+            }
         }
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('new user added');
+            res.status(200).send(neueAngebotdaten);
         });
     });
 };
