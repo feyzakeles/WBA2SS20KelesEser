@@ -1,29 +1,14 @@
 [
-    {
-    "preiskategorie1": [
-        {
-        "autoid": 1,
-        "startort": "bonn",
-        "zielort": "Berlin"
-        }
-      ]
-    },
-    {
-    "preiskategorie2": [
-        {
-        "autoid": 1,
-        "startort": "bonn",
-        "zielort": "Berlin"
-        }
-      ]
-    },
-    {
-    "preiskategorie3": [
-        {
-        "autoid": 1,
-        "startort": "bonn",
-        "zielort": "Berlin"
-        }
-      ]
+  {
+  "pid": 200,
+  "preis1": 40,
+  "preis2": 50,
+  "automodelle": ["BMW", "Porsche"]
+  },
+  {
+    "pid": 300,
+    "preis1": 30,
+    "preis2": 40,
+    "automodelle": ["Ford", "VW"]
     }
-  ]
+]

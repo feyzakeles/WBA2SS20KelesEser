@@ -1,74 +1,100 @@
 
-const request = require('request');
+var async = require('async')
+var files = ['./data/anbieter.json', './data/automodelle.json'];
+
+
 var fs = require('fs');
 
 module.exports = {
-    getAutomodell,
+    // getAutomodell,
     postAutomodell,
     putAutomodell
 }
 
-//helper
-const writeFile = (fileData, callback, filePath = dataPath, encoding = 'utf8') => {
-
-    fs.writeFile(filePath, fileData, encoding, (err) => {
-        if (err) {
+/* function getAutomodell(req, res) {
+    async.map(files, fs.readFile, function(err, files) {
+        if(err) {
             throw err;
         }
+        var a = JSON.parse(files[0])
+        var b = JSON.parse(files[1])
 
-        callback();
+        a.forEach(element => {
+            console.log(element);
+        });
+
     });
-};
+}; */
 
-function getAutomodell(req, res) {
-    request("https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json",{ json: true }, (err, body) => {
-        if (err) {
-            return  console.log(err)
-        };
-        if (!err) {
-            res.status(200).send(body);
-        };
-    });    
-};
-
-//POST Automodell aussuchen
+//POST Automodell auswählen
 function postAutomodell(req, res){
-    request("https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json",{ json: true }, (err, body) => {
-        if (err) {
-            return  console.log(err)
-        };
-        if (!err) {
-            var newCar = {
-                automodell: req.body.automodell
-            };  
+    async.map(files, fs.readFile, function(err, files) {
+        if(err) {
+            throw res.status(500).send(err);
+        } 
+        var a = JSON.parse(files[0]);
+        var b = JSON.parse(files[1]);
+        
+        var userid = parseInt(req.params.id);
+        
+        for(var i in a){ 
+            for(var j in b){  
+            var w = b[j].pid;
+            var x = b[j].automodelle;
+            var y = b[j].preis1;
+            var z = b[j].preis2; 
 
-            for (var i in body){
-                if(body[i].Count == 158){
-                var u = body[i].Results;
-                for (var j in u){
-                if (u[j].MakeName == newCar.automodell){
-                    u[j].push(newCar);
-                    }
-                    
+            var newAutomodell = {
+                automodell: req.body.automodell,
+            }; 
+            for(var i in x){
+                if(x[i] === newAutomodell.automodell){
+                    var newCar = {
+                        pid: w,
+                        automodell: newAutomodell.automodell,
+                        preis1: y,
+                        preis2: z
+                    };                    
+                }
+                b[j] = x;
+                
+            } 
+           
+        }  
+        if(a[i].id == userid){
+            var w =  a[i].automodell;
+                for (var j in w) {
+                if(w[j] == null){
+                    w[j] = newCar;
                 }
             }
-            }writeFile(JSON.stringify(body, null, 2), () => {
-                res.status(201).send("ok");
-            });
-            
-        };
-    });  
+         } 
+    }
+        fs.writeFile('./data/anbieter.json', JSON.stringify(a, null, 2), () => {
+            if (err) {
+                throw err;
+            }
+            res.status(201).send(newCar);
+        }); 
+    });
      
-};
+}; 
 
-//PUT Angebot ändern
+
+//PUT Automodell ändern
 function putAutomodell(req, res){
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
             throw err;
         }
         writeFile(JSON.stringify(a, null, 2), () => {
+            if (err) {
+                throw err;
+            }
+    
             res.status(200).send(neueAngebotdaten);
+        
+            
         });
     });
 };

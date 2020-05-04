@@ -29,11 +29,11 @@ app.put('/anbieter/:id/angebote/:aid', controllerangebot.putAngebote);
 //DELETE Angebot löschen
 app.put('/anbieter/:id/angebote/:aid', controllerangebot.deleteAngebote);
 
-// app.get('/automodell', controllerautomodell.getAutomodell);
-
 /* ----------- AUTOMODELL AUSWÄHLEN ----------- */
 
+// app.get('/automodelle', controllerautomodell.getAutomodell);
 
+//POST Automodell auswählen
 app.post('/anbieter/:id/automodell', controllerautomodell.postAutomodell);
 
 

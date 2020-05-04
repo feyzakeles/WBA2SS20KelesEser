@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/feyzakeles/WBA2SS20KelesEser#readme",
   "dependencies": {
+    "async": "^3.2.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",

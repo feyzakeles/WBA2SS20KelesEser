@@ -3,6 +3,9 @@
     "id": 1,
     "vorname": "Peter",
     "nachname": "Parker",
+    "automodell": [
+      null
+    ],
     "angebote": [
       {
         "id": 1,
@@ -15,10 +18,13 @@
     "id": 2,
     "vorname": "Merve",
     "nachname": "Eser",
+    "automodell": [
+      null
+    ],
     "angebote": [
       {
         "id": 1,
-        "startort": "München",
+        "startort": "Köln",
         "zielort": "Berlin"
       }
     ]
@@ -28,10 +34,32 @@
     "vorname": "Feyza",
     "nachname": "Keles",
     "automodell": [
-      null
+      {
+        "pid": 300,
+        "automodell": "VW",
+        "preis1": 30,
+        "preis2": 40
+      }
     ],
     "angebote": [
-      null
+      {
+        "id": 1,
+        "startort": "Köln",
+        "zielort": "Hamburg",
+        "datum": "22.06.2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0
+      },
+      {
+        "id": 2,
+        "startort": "Köln",
+        "zielort": "Berlin",
+        "datum": "20.05.2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0
+      }
     ]
   }
 ]

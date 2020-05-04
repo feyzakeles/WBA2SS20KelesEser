@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express.Router();
 var controller = require('../controller/mitfahrer');
+var controllerangebot = require('../controller/angebote');
 
 
 /* ----------- MITFAHRERPROFIL BEREICH ----------- */
@@ -16,5 +17,10 @@ app.put('/mitfahrer/:id', controller.putMitfahrer);
 
 //DELETE Mitfahrer löschen
 app.delete('/mitfahrer/:id', controller.deleteMitfahrer);
+
+/* ----------- ANGEBOT SUCHEN ----------- */
+
+//GET Angebot suchen
+app.get('/angebote', controllerangebot.sucheAngebote);
 
 module.exports = app;

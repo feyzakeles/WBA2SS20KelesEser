@@ -5,7 +5,8 @@ var fs = require('fs');
 module.exports = {
     postAngebote,
     putAngebote,
-    deleteAngebote
+    deleteAngebote,
+    sucheAngebote
 }
 
 //helper
@@ -47,6 +48,10 @@ function postAngebote(req, res){
             id: neueId,
             startort: req.body.startort,
             zielort: req.body.zielort,
+            datum: req.body.datum,
+            sitzanzahl: req.body.sitzanzahl,
+            verfügbar: req.body.verfügbar,
+            besetzt: req.body.besetzt
         };  
         
         for (var i in a) {
@@ -78,6 +83,10 @@ function putAngebote(req, res){
                     if (u[j].id == angebotid){
                         u[j].startort = req.body.startort;
                         u[j].zielort = req.body.zielort;
+                        u[j].datum = req.body.datum;
+                        u[j].sitzanzahl = req.body.sitzanzahl;
+                        u[j].verfügbar = req.body.verfügbar;
+                        u[j].besetzt = req.body.besetzt;
                         var neueAngebotdaten = u[j];
                         
                     }
@@ -96,6 +105,23 @@ function deleteAngebote(req, res){
         if (err) {
             throw err;
         }
+        writeFile(JSON.stringify(a, null, 2), () => {
+            res.status(201).send('new user added');
+        });
+    });
+};
+
+
+//GET Mitfahrer sucht ein Angebot
+function sucheAngebote(req, res){
+    fs.readFile(dataPath, 'utf8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+        var von = query.von;
+        var nach = query.nach;
+        var datum = guery.datum;
+
         writeFile(JSON.stringify(a, null, 2), () => {
             res.status(201).send('new user added');
         });
