@@ -118,12 +118,13 @@ function sucheAngebote(req, res){
         if (err) {
             throw err;
         }
-        var von = query.von;
-        var nach = query.nach;
-        var datum = guery.datum;
+        var a = JSON.parse(data);
+        var startort = req.query.startort;
+        var zielort = req.query.zielort; 
+        // var datum = req.guery.datum;
+        
+        var filterData =  a.filter(obj => (obj.angebote = obj.angebote.filter(o => o.startort === startort && o.zielort === zielort)).length);
 
-        writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('new user added');
-        });
+        res.status(200).send(filterData);
     });
 };

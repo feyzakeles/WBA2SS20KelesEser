@@ -46,16 +46,16 @@
         "id": 1,
         "startort": "Köln",
         "zielort": "Hamburg",
-        "datum": "22.06.2020",
+        "datum": "22-06-2020",
         "sitzanzahl": 4,
         "verfügbar": 4,
         "besetzt": 0
       },
       {
         "id": 2,
-        "startort": "Köln",
+        "startort": "Bonn",
         "zielort": "Berlin",
-        "datum": "20.05.2020",
+        "datum": "20-05-2020",
         "sitzanzahl": 4,
         "verfügbar": 4,
         "besetzt": 0
