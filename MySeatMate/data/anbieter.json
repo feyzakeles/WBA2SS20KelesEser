@@ -4,13 +4,22 @@
     "vorname": "Peter",
     "nachname": "Parker",
     "automodell": [
-      null
+      {
+        "pid": 300,
+        "automodell": "Ford",
+        "preis1": 30,
+        "preis2": 40
+      }
     ],
     "angebote": [
       {
         "id": 1,
-        "startort": "bonn",
-        "zielort": "Berlin"
+        "startort": "Köln",
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0
       }
     ]
   },
@@ -19,13 +28,22 @@
     "vorname": "Merve",
     "nachname": "Eser",
     "automodell": [
-      null
+      {
+        "pid": 200,
+        "automodell": "Porsche",
+        "preis1": 40,
+        "preis2": 50
+      }
     ],
     "angebote": [
       {
         "id": 1,
         "startort": "Köln",
-        "zielort": "Berlin"
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0
       }
     ]
   },
@@ -55,6 +73,15 @@
         "id": 2,
         "startort": "Bonn",
         "zielort": "Berlin",
+        "datum": "20-05-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0
+      },
+      {
+        "id": 3,
+        "startort": "Köln",
+        "zielort": "Bonn",
         "datum": "20-05-2020",
         "sitzanzahl": 4,
         "verfügbar": 4,

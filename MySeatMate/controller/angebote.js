@@ -1,6 +1,7 @@
 
 const dataPath = './data/anbieter.json';
 var fs = require('fs');
+var distance = require('google-distance');
 
 module.exports = {
     postAngebote,
@@ -118,13 +119,54 @@ function sucheAngebote(req, res){
         if (err) {
             throw err;
         }
+        
         var a = JSON.parse(data);
         var startort = req.query.startort;
         var zielort = req.query.zielort; 
-        // var datum = req.guery.datum;
+        var datum = req.query.datum;
         
-        var filterData =  a.filter(obj => (obj.angebote = obj.angebote.filter(o => o.startort === startort && o.zielort === zielort)).length);
+        var filterData =  a.filter(obj => (obj.angebote = obj.angebote.filter(o => o.startort === startort && o.zielort === zielort && o.datum === datum)).length);
 
-        res.status(200).send(filterData);
+        for(var i in filterData){
+            var x = filterData[i].automodell;
+            for(var j in x){
+                if(x[j].automodell === "VW" || x[j].automodell === "Ford"){
+                    var preis1 = x[j].preis1;
+                    var preis2 = x[j].preis2;
+                }
+                else if(x[j].automodell === "Porsche" || x[j].automodell === "BMW"){
+                    var p1 = x[j].preis1;
+                    var p2 = x[j].preis2;
+                }
+            }
+        }
+
+        //API Bereich (Km+Preis)
+        distance.apiKey = 'AIzaSyCGe6ODuDGJ4kITEs5tmAFr09YZTreh0-Q'; 
+        distance.get(
+            {
+              origin: startort,
+              destination: zielort
+            },
+            function(err, body) {
+                if (err){ 
+                    throw console.log(err);
+                } 
+                var dist = parseInt(body.distance);
+                if(dist > 100){
+                    console.log(preis2);
+                }else{
+                    console.log(preis1);
+                } 
+                if(dist > 100){
+                    console.log(p2);
+                }else{
+                    console.log(p1);
+                } 
+          });
+ 
+          res.status(200).send(filterData);
     });
+
+   
 };

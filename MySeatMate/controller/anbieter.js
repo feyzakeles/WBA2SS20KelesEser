@@ -2,8 +2,8 @@
 const dataPath = './data/anbieter.json';
 var angebotfunction = require('./angebote.js');
 var automodellfunction = require('./automodelle.js');
-
 var fs = require('fs');
+
 module.exports = {
     getAnbieter,
     postAnbieter,
