@@ -141,58 +141,42 @@ function sucheAngebote(req, res){
                     throw console.log(err);
                 } 
                 var dist = parseInt(body.distance);
-               /*  
-  
-                for(var i in filterData){
-                    var x = filterData[i].obj;
-                    for(var j in x){
-                        
-                       
-                          
-                            if( x.hasOwnProperty('angebote') === undefined){ 
-                                console.log("true");
-                            
-                        
-                        
-                        }else{
-                            console.log("false");
-                        }
-                    }
-                } */
+        
 
                for(var i in filterData){
+                    var x = filterData[i].automodell;
+                    for(var j in x){
+                        if(x[j].automodell === "VW" || x[j].automodell === "Ford" && dist > 100){ 
+                           var preis2 = x[j].preis2;
+                           console.log(preis2);
+                        }
+
+                        else if(x[j].automodell === "VW" || x[j].automodell === "Ford" && dist < 100){
+                            var preis1 = x[j].preis1;
+                            console.log(preis1);
+                        }
+
+                        else if(x[j].automodell === "Porsche" || x[j].automodell === "BMW" && dist > 100){
+                            var p2 = x[j].preis2;
+                            console.log(p2);
+                        }
+
+                        else if(x[j].automodell === "Porsche" || x[j].automodell === "BMW" && dist < 100){
+                            var p1 = x[j].preis1;
+                            console.log(p1);
+                        }
+                        
+                    }
                    var x = filterData[i].angebote;
                    for(var index = 0; index < x.length; index++){
-                       if(x[index].id > null){
-                           x.push({"km": dist});
+                       if(x[index].id > 0){
+                           x[index].entfernung = dist;
+                        
                        }
                    
                    }
-               }
-
-              /*   for(var i in filterData){
-                    var x = filterData[i].automodell;
-                    for(var j in x){
-                        if(x[j].automodell === "VW" || x[j].automodell === "Ford" && dist > 100){
-                            
-                            console.log(x[j].preis2);
-                        }
-                        if(x[j].automodell === "VW" || x[j].automodell === "Ford" && dist < 100){
-                           
-                            console.log(x[j].preis1);
-                        }
-                       
-                        if(x[j].automodell === "Porsche" || x[j].automodell === "BMW" && dist > 100){
-                            console.log(x[j].preis2);
-                        }
-                        if(x[j].automodell === "Porsche" || x[j].automodell === "BMW" && dist < 100){
-                            console.log(x[j].preis1);
-                        }
-                       
-                        
-                    }
                     
-                } */
+               }
                 res.status(200).send(filterData);
           });
  

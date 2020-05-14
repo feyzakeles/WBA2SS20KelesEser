@@ -62,15 +62,6 @@
         "sitzanzahl": 4,
         "verfügbar": 4,
         "besetzt": 0
-      },
-      {
-        "id": 3,
-        "startort": "Köln",
-        "zielort": "Hamburg",
-        "datum": "22-06-2020",
-        "sitzanzahl": 4,
-        "verfügbar": 4,
-        "besetzt": 0
       }
     ]
   },
@@ -110,15 +101,6 @@
         "startort": "Köln",
         "zielort": "Bonn",
         "datum": "20-05-2020",
-        "sitzanzahl": 4,
-        "verfügbar": 4,
-        "besetzt": 0
-      },
-      {
-        "id": 4,
-        "startort": "Köln",
-        "zielort": "Hamburg",
-        "datum": "22-06-2020",
         "sitzanzahl": 4,
         "verfügbar": 4,
         "besetzt": 0
