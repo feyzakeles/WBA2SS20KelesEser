@@ -65,7 +65,7 @@ function postAnbieter(req, res){
             vorname: req.body.vorname,
             nachname: req.body.nachname,
             automodell: [automodellfunction.postAutomodell],
-            angebote: [angebotfunction.postAngebote]
+            angebote: [angebotfunction.postAngebote || req.body.angebote]
         };
         for(var index = 0; index < a.length; index++){
             if(a[index].vorname == newAnbieter.vorname && a[index].nachname == newAnbieter.nachname){

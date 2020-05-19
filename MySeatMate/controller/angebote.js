@@ -2,6 +2,7 @@
 const dataPath = './data/anbieter.json';
 var fs = require('fs');
 var distance = require('google-distance');
+var buchungfunction = require('./buchung.js');
 
 module.exports = {
     postAngebote,
@@ -32,38 +33,68 @@ function postAngebote(req, res){
         var a = JSON.parse(data);
         var letzteID = 0; 
 
-        for (var i in a){
-            if(a[i].id == userid){
-            var u = a[i].angebote;
-            for (var j in u){
-            if (u[j].id > letzteID){
-                letzteID = parseInt(u[j].id);
+       
+        //API Bereich (Km+Preis)
+        distance.apiKey = 'AIzaSyCGe6ODuDGJ4kITEs5tmAFr09YZTreh0-Q'; 
+        distance.get(
+            {
+              origin: req.body.startort,
+              destination: req.body.zielort
+            },
+            function(err, body) {
+                if (err){ 
+                    throw console.log(err);
+                } 
+                var dist = parseInt(body.distance);
+                var result = dist*0.70;
+
+                for (var i in a){
+                    if(a[i].id == userid){
+                    var x = a[i].automodell;
+                    for(var t in x){
+                        if(dist>100){
+                            var preis2 = x[t].preis2+result;
+                        }else{
+                            var preis1 = x[t].preis1+result;
+                        }
+                    }
+                    var u = a[i].angebote;
+                    for (var j in u){
+                    if (u[j].id > letzteID){
+                        letzteID = parseInt(u[j].id);
+                        }
+                        
+                    }
                 }
+                }
+                var neueId = letzteID + 1; 
                 
-            }
-        }
-        }
-        var neueId = letzteID + 1; 
-        
-        var newAngebot = {
-            id: neueId,
-            startort: req.body.startort,
-            zielort: req.body.zielort,
-            datum: req.body.datum,
-            sitzanzahl: req.body.sitzanzahl,
-            verfügbar: req.body.verfügbar,
-            besetzt: req.body.besetzt
-        };  
-        
-        for (var i in a) {
-			if (a[i].id == userid){
-                a[i].angebote.push(newAngebot);
-                
-            } 
-        }
+                var newAngebot = {
+                    id: neueId,
+                    startort: req.body.startort,
+                    zielort: req.body.zielort,
+                    datum: req.body.datum,
+                    sitzanzahl: req.body.sitzanzahl,
+                    verfügbar: req.body.verfügbar,
+                    besetzt: req.body.besetzt,
+                    km: dist,
+                    km_mit_kosten: result,
+                    preis: preis1 || preis2,
+                    gebucht_von: [buchungfunction.postBuchung]
+                };  
+
+                for (var i in a) {
+                    if (a[i].id == userid){
+                        a[i].angebote.push(newAngebot);
+                        
+                    } 
+                }
+           
+       
         writeFile(JSON.stringify(a, null, 2), () => {
             res.status(201).send(newAngebot);
         });
+    });
     });
 };
 
@@ -127,58 +158,10 @@ function sucheAngebote(req, res){
         
         var filterData =  a.filter(obj => (obj.angebote = obj.angebote.filter(o => o.startort === startort && o.zielort === zielort && o.datum === datum)).length);
 
-       
+      
 
-        //API Bereich (Km+Preis)
-        distance.apiKey = 'AIzaSyCGe6ODuDGJ4kITEs5tmAFr09YZTreh0-Q'; 
-        distance.get(
-            {
-              origin: startort,
-              destination: zielort
-            },
-            function(err, body) {
-                if (err){ 
-                    throw console.log(err);
-                } 
-                var dist = parseInt(body.distance);
-        
-
-               for(var i in filterData){
-                    var x = filterData[i].automodell;
-                    for(var j in x){
-                        if(x[j].automodell === "VW" || x[j].automodell === "Ford" && dist > 100){ 
-                           var preis2 = x[j].preis2;
-                           console.log(preis2);
-                        }
-
-                        else if(x[j].automodell === "VW" || x[j].automodell === "Ford" && dist < 100){
-                            var preis1 = x[j].preis1;
-                            console.log(preis1);
-                        }
-
-                        else if(x[j].automodell === "Porsche" || x[j].automodell === "BMW" && dist > 100){
-                            var p2 = x[j].preis2;
-                            console.log(p2);
-                        }
-
-                        else if(x[j].automodell === "Porsche" || x[j].automodell === "BMW" && dist < 100){
-                            var p1 = x[j].preis1;
-                            console.log(p1);
-                        }
-                        
-                    }
-                   var x = filterData[i].angebote;
-                   for(var index = 0; index < x.length; index++){
-                       if(x[index].id > 0){
-                           x[index].entfernung = dist;
-                        
-                       }
-                   
-                   }
-                    
-               }
-                res.status(200).send(filterData);
-          });
+        res.status(200).send(filterData);
+          
  
           
     });

@@ -26,7 +26,7 @@ app.get('/angebote', controllerangebot.sucheAngebote);
 
 /* ----------- BUCHUNG BEREICH ----------- */
 
-//GET Ein Angebot buchen
-app.get('/mitfahrer/:id/angebote/:id/buchung', controllerbuchung.postBuchung);
+//POST Ein Angebot buchen
+app.post('/mitfahrer/:mid/angebote/:aid/buchung', controllerbuchung.postBuchung);
 
 module.exports = app;
