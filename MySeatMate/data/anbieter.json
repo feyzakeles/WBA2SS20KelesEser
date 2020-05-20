@@ -15,7 +15,7 @@
       {
         "id": 1,
         "startort": "Köln",
-        "zielort": "Berlin",
+        "zielort": "Bonn",
         "datum": "22-06-2020",
         "sitzanzahl": 4,
         "verfügbar": 4,
@@ -24,11 +24,17 @@
       {
         "id": 2,
         "startort": "Köln",
-        "zielort": "Hamburg",
+        "zielort": "Berlin",
         "datum": "22-06-2020",
         "sitzanzahl": 4,
         "verfügbar": 4,
-        "besetzt": 0
+        "besetzt": 0,
+        "km": 573,
+        "km_mit_kosten": 401,
+        "preis": 441,
+        "gebucht_von": [
+          null
+        ]
       }
     ]
   },
@@ -49,15 +55,6 @@
         "id": 1,
         "startort": "Köln",
         "zielort": "Berlin",
-        "datum": "22-06-2020",
-        "sitzanzahl": 4,
-        "verfügbar": 4,
-        "besetzt": 0
-      },
-      {
-        "id": 2,
-        "startort": "Köln",
-        "zielort": "Hamburg",
         "datum": "22-06-2020",
         "sitzanzahl": 4,
         "verfügbar": 4,
@@ -86,45 +83,6 @@
         "sitzanzahl": 4,
         "verfügbar": 4,
         "besetzt": 0
-      },
-      {
-        "id": 2,
-        "startort": "Bonn",
-        "zielort": "Berlin",
-        "datum": "20-05-2020",
-        "sitzanzahl": 4,
-        "verfügbar": 4,
-        "besetzt": 0
-      },
-      {
-        "id": 3,
-        "startort": "Köln",
-        "zielort": "Berlin",
-        "datum": "22-06-2020",
-        "sitzanzahl": 4,
-        "verfügbar": 4,
-        "besetzt": 0,
-        "km": 573,
-        "km_mit_kosten": 401.09999999999997,
-        "preis": 441.09999999999997,
-        "gebucht_von": [
-          null
-        ]
-      },
-      {
-        "id": 4,
-        "startort": "Köln",
-        "zielort": "Bonn",
-        "datum": "22-06-2020",
-        "sitzanzahl": 4,
-        "verfügbar": 4,
-        "besetzt": 0,
-        "km": 28,
-        "km_mit_kosten": 19.599999999999998,
-        "preis": 49.599999999999994,
-        "gebucht_von": [
-          null
-        ]
       }
     ]
   }

@@ -46,16 +46,16 @@ function postAngebote(req, res){
                     throw console.log(err);
                 } 
                 var dist = parseInt(body.distance);
-                var result = dist*0.70;
+                var result = parseInt(dist*0.70);
 
                 for (var i in a){
                     if(a[i].id == userid){
                     var x = a[i].automodell;
                     for(var t in x){
                         if(dist>100){
-                            var preis2 = x[t].preis2+result;
+                            var preis2 = parseInt(x[t].preis2+result);
                         }else{
-                            var preis1 = x[t].preis1+result;
+                            var preis1 = parseInt(x[t].preis1+result);
                         }
                     }
                     var u = a[i].angebote;
@@ -138,7 +138,7 @@ function deleteAngebote(req, res){
             throw err;
         }
         writeFile(JSON.stringify(a, null, 2), () => {
-            res.status(201).send('new user added');
+            res.status(200).send('new user added');
         });
     });
 };

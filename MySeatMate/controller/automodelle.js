@@ -6,25 +6,9 @@ var files = ['./data/anbieter.json', './data/automodelle.json'];
 var fs = require('fs');
 
 module.exports = {
-    // getAutomodell,
-    postAutomodell,
-    putAutomodell
+    postAutomodell
 }
 
-/* function getAutomodell(req, res) {
-    async.map(files, fs.readFile, function(err, files) {
-        if(err) {
-            throw err;
-        }
-        var a = JSON.parse(files[0])
-        var b = JSON.parse(files[1])
-
-        a.forEach(element => {
-            console.log(element);
-        });
-
-    });
-}; */
 
 //POST Automodell auswählen
 function postAutomodell(req, res){
@@ -80,22 +64,4 @@ function postAutomodell(req, res){
      
 }; 
 
-
-//PUT Automodell ändern
-function putAutomodell(req, res){
-    fs.readFile(dataPath, 'utf8', (err, data) => {
-        if (err) {
-            throw err;
-        }
-        writeFile(JSON.stringify(a, null, 2), () => {
-            if (err) {
-                throw err;
-            }
-    
-            res.status(200).send(neueAngebotdaten);
-        
-            
-        });
-    });
-};
 
