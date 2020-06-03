@@ -1,7 +1,6 @@
 
 const dataPath = './data/anbieter.json';
 var angebotfunction = require('./angebote.js');
-var automodellfunction = require('./automodelle.js');
 var fs = require('fs');
 
 module.exports = {
@@ -64,7 +63,7 @@ function postAnbieter(req, res){
             id: neueId,
             vorname: req.body.vorname,
             nachname: req.body.nachname,
-            automodell: [automodellfunction.postAutomodell],
+            automodell: [req.body.automodell],
             angebote: [angebotfunction.postAngebote]
         };
         for(var index = 0; index < a.length; index++){

@@ -2,7 +2,7 @@ var express = require('express');
 var app = express.Router();
 var controller = require('../controller/anbieter');
 var controllerangebot = require('../controller/angebote');
-var controllerautomodell = require('../controller/automodelle');
+
 
 /* ----------- ANBIETERPROFIL BEREICH ----------- */
 
@@ -29,10 +29,7 @@ app.put('/anbieter/:id/angebote/:aid', controllerangebot.putAngebote);
 //DELETE Angebot löschen
 app.put('/anbieter/:id/angebote/:aid', controllerangebot.deleteAngebote);
 
-/* ----------- AUTOMODELL AUSWÄHLEN ----------- */
 
-//POST Automodell auswählen
-app.post('/anbieter/:id/automodell', controllerautomodell.postAutomodell);
 
 
 module.exports = app;

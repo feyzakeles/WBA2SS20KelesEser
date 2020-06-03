@@ -1,0 +1,14 @@
+[
+    {
+    "esid": 1,
+    "stufe": "Neuling"
+    },
+    {
+    "esid": 2,
+    "stufe": "Aufsteiger"
+    },
+    {
+    "esid": 3,
+    "stufe": "Fortgeschrittener"
+    }
+  ]

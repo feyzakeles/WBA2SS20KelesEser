@@ -66,7 +66,7 @@ function postMitfahrer(req, res){
         };
         for(var index = 0; index < a.length; index++){
             if(a[index].vorname == newMitfahrer.vorname && a[index].nachname == newMitfahrer.nachname){
-               res.status(500).send({error: "Anbieter existiert bereits!!"});
+               res.status(500).send({error: "Mitfahrer existiert bereits!!"});
                return;
             }
           }
@@ -95,7 +95,7 @@ function putMitfahrer(req, res){
                 a[i].gepaeck = req.body.gepaeck;
                 var neueMitfahrerdaten = a[i];
                 res.status(200).send(neueMitfahrerdaten);
-                return  
+                
             }   
         }
         writeFile(JSON.stringify(a, null, 2), () => {

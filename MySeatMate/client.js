@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var axios = require('axios');
+var dataPath = require('./data/automodelle.json');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,26 +25,60 @@ app.get('/anbieter/:id', (req, res) => {
 
 //POST Neuen Anbieter erstellen
 app.post('/anbieter', (req, res) => {
+    var b = JSON.parse(JSON.stringify(dataPath))
+    for(var j in b){  
+        var w = b[j].pid;
+        var x = b[j].automodelle;
+        var y = b[j].preis1;
+        var z = b[j].preis2; 
 
-    axios.post(`http://localhost:3001/anbieter`, { 
+        var newAutomodell = {
+            automodell: req.body.automodell,
+        }; 
+        for(var i in x){
+            if(x[i] === newAutomodell.automodell){
+                var newCar = {
+                    pid: w,
+                    automodell: newAutomodell.automodell,
+                    preis1: y,
+                    preis2: z
+                };                    
+            }
+            b[j] = x;
+            
+        } 
+       
+    }  
+    axios.post(`http://localhost:3001/anbieter` , {
         vorname: req.body.vorname,
         nachname: req.body.nachname,
-        automodell: req.body.automodell
-        })
+        automodell: newCar
+    })
         .then(function (response) {
+           for(var i in response.data){ 
+                
+            if(response.data[i].id !== null){
+                var w =  response.data[i].automodell;
+                    for (var j in w) {
+                    if(w[j] == null){
+                        w[j] = newCar;
+                    }
+                }
+             } 
+        } 
             res.status(200).send(response.data);
         })
         .catch(function (error) {
             res.status(500).send({error: "Anbieter existiert bereits!!"});
         })
 
+
 });
 
-//PUT Anbieter Einstellungen ändern
+//PUT Neuen Anbieter erstellen
 app.put('/anbieter/:id', (req, res) => {
 
     axios.put(`http://localhost:3001/anbieter/${req.params.id}`, { 
-
         vorname: req.body.vorname,
         nachname: req.body.nachname
         })
@@ -51,7 +86,7 @@ app.put('/anbieter/:id', (req, res) => {
             res.status(200).send(response.data);
         })
         .catch(function (error) {
-            res.status(500).send({error: "Anbieter wurde nicht aktualisiert!!"});
+            res.status(500).send({error: "error"});
         })
 
 });
@@ -59,20 +94,15 @@ app.put('/anbieter/:id', (req, res) => {
 //DELETE Anbieter löschen
 app.delete('/anbieter/:id', (req, res) => {
 
-    axios.delete(`http://localhost:3001/anbieter/${req.params.id}`, { 
-
-        vorname: req.body.vorname,
-        nachname: req.body.nachname
-        })
+    axios.delete(`http://localhost:3001/anbieter/${req.params.id}`)
         .then(function (response) {
             res.status(200).send(response.data);
         })
         .catch(function (error) {
-            res.status(500).send({error: "Anbieter wurde nicht gelöscht!!"});
+            res.status(500).send({error: "error"});
         })
 
 });
-
 
 /* ----------- ANGEBOT BEREICH ----------- */
 
@@ -80,70 +110,41 @@ app.delete('/anbieter/:id', (req, res) => {
 app.post('/anbieter/:id/angebote', (req, res) => {
 
     axios.post(`http://localhost:3001/anbieter/${req.params.id}/angebote`, { 
-        vorname: req.body.vorname,
-        nachname: req.body.nachname
+        startort: req.body.startort,
+        zielort: req.body.zielort,
+        datum: req.body.datum,
+        sitzanzahl: req.body.sitzanzahl,
+        verfügbar: req.body.verfügbar,
+        besetzt: req.body.besetzt
         })
         .then(function (response) {
+            // console.log(response.data.datum);
             res.status(200).send(response.data);
         })
         .catch(function (error) {
-            res.status(500).send({error: "Neues Angebot konnte nicht erstellt werden!!"});
+            res.status(500).send({error: "error"});
         })
 
 });
 
-//PUT Angebot ändern
-app.put('/anbieter/:id/angebote/:aid', (req, res) => {
 
-    axios.put(`http://localhost:3001/anbieter/${req.params.id}/angebote/${req.params.aid}`, { 
+//GET Mitfahrer sucht ein Angebot
+app.get('/angebote', (req, res) => {
 
-        vorname: req.body.vorname,
-        nachname: req.body.nachname
+    axios.get(`/angebote`, { 
+        startort: req.query.startort,
+        zielort: req.query.zielort, 
+        datum: req.query.datum
         })
         .then(function (response) {
+            // console.log(response.data.datum);
             res.status(200).send(response.data);
         })
         .catch(function (error) {
-            res.status(500).send({error: "Angebot konnte nicht geändert werden!!"});
+            res.status(500).send({error: "error"});
         })
 
 });
-
-//DELETE Angebot löschen
-app.delete('/anbieter/:id/angebote/:aid', (req, res) => {
-
-    axios.delete(`http://localhost:3001/anbieter/${req.params.id}/angebote/${req.params.aid}`, { 
-
-        vorname: req.body.vorname,
-        nachname: req.body.nachname
-        })
-        .then(function (response) {
-            res.status(200).send(response.data);
-        })
-        .catch(function (error) {
-            res.status(500).send({error: "Angebot konnte nicht gelöscht werden!!"});
-        })
-
-});
-
-/* ----------- AUTOMODELL AUSWÄHLEN ----------- */
-
-//POST Automodell auswählen
-app.post('/anbieter/:id/automodell', (req, res) => {
-
-    axios.post(`http://localhost:3001/anbieter/${req.params.id}/automodell`, { 
-        vorname: req.body.vorname,
-        nachname: req.body.nachname
-        })
-        .then(function (response) {
-            res.status(200).send(response.data);
-        })
-        .catch(function (error) {
-            res.status(500).send({error: "Automodell konnte nicht ausgewählt werden!!"});
-        })
-
-});
-
 
 /* ----------- MITFAHRERPROFIL BEREICH ----------- */
 
@@ -151,25 +152,25 @@ app.post('/anbieter/:id/automodell', (req, res) => {
 app.get('/mitfahrer/:id', (req, res) => {
 
     axios.get(`http://localhost:3001/mitfahrer/${req.params.id}`)
-    .then(function (response) {
-        res.status(200).send(response.data);
-    })
-    .catch(function (error) {
-        res.status(500).send("Server läuft nicht!!!");
-        
-    })
+        .then(function (response) {
+            res.status(200).send(response.data);
+        })
+        .catch(function (error) {
+            res.status(500).send("Server läuft nicht!!!");
+            
+        })
 
 });
-
 
 
 //POST Neuen Mitfahrer erstellen
 app.post('/mitfahrer', (req, res) => {
 
-    
     axios.post(`http://localhost:3001/mitfahrer`, { 
         vorname: req.body.vorname,
-        nachname: req.body.nachname
+        nachname: req.body.nachname,
+        mitfahreranzahl: req.body.mitfahreranzahl,
+        gepaeck: req.body.gepaeck
         })
         .then(function (response) {
             res.status(200).send(response.data);
@@ -180,21 +181,20 @@ app.post('/mitfahrer', (req, res) => {
 
 });
 
-
-
-//PUT Mitfahrer Einstellungen ändern
+//PUT Neuen Mitfahrer erstellen
 app.put('/mitfahrer/:id', (req, res) => {
 
     axios.put(`http://localhost:3001/mitfahrer/${req.params.id}`, { 
-
         vorname: req.body.vorname,
-        nachname: req.body.nachname
+        nachname: req.body.nachname,
+        mitfahreranzahl: req.body.mitfahreranzahl,
+        gepaeck: req.body.gepaeck
         })
         .then(function (response) {
             res.status(200).send(response.data);
         })
         .catch(function (error) {
-            res.status(500).send({error: "Mitfahrer wurde nicht aktualisiert!!"});
+            res.status(500).send({error: "error"});
         })
 
 });
@@ -202,54 +202,16 @@ app.put('/mitfahrer/:id', (req, res) => {
 //DELETE Mitfahrer löschen
 app.delete('/mitfahrer/:id', (req, res) => {
 
-    axios.delete(`http://localhost:3001/mitfahrer/${req.params.id}`, { 
-
-        vorname: req.body.vorname,
-        nachname: req.body.nachname
-        })
+    axios.delete(`http://localhost:3001/mitfahrer/${req.params.id}`)
         .then(function (response) {
             res.status(200).send(response.data);
         })
         .catch(function (error) {
-            res.status(500).send({error: "Mitfahrer wurde nicht gelöscht!!"});
+            res.status(500).send({error: "error"});
+            
         })
 
 });
-
-/* ----------- ANGEBOT SUCHEN ----------- */
-
-//GET Angebot suchen
-app.get('/angebote', (req, res) => {
-
-    axios.get(`http://localhost:3001/angebote`,) //buraya bakcen merve
-    .then(function (response) {
-        res.status(200).send(response.data);
-    })
-    .catch(function (error) {
-        res.status(500).send("Keine Angebote!!!");
-        
-    })
-
-});
-
-/* ----------- BUCHUNG BEREICH ----------- */
-
-//POST Ein Angebot buchen
-app.post('/mitfahrer/:mid/angebote/:aid/buchung', (req, res) => {
-
-    axios.post(`http://localhost:3001/mitfahrer/${req.params.mid}/angebote/${req.params.aid}/buchung`, { 
-        vorname: req.body.vorname,
-        nachname: req.body.nachname
-        })
-        .then(function (response) {
-            res.status(200).send(response.data);
-        })
-        .catch(function (error) {
-            res.status(500).send({error: "Angebot ist ausgebucht!!"});
-        })
-
-});
-
 
 const client = app.listen(8080, () => {
     console.log('listening on port %s...', client.address().port);
