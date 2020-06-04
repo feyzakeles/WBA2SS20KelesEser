@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "vorname": "Peter",
+    "nachname": "Parker",
+    "automodell": [
+      {
+        "pid": 300,
+        "automodell": "Ford",
+        "preis1": 30,
+        "preis2": 40
+      }
+    ],
+    "angebote": [
+      {
+        "id": 1,
+        "startort": "Köln",
+        "zielort": "Bonn",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0
+      },
+      {
+        "id": 2,
+        "startort": "Köln",
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0,
+        "km": 573,
+        "km_mit_kosten": 401,
+        "preis": 441,
+        "gebucht_von": [
+          null
+        ]
+      },
+      {
+        "id": 3,
+        "startort": "Gummersbach",
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0,
+        "km": 553,
+        "km_mit_kosten": 387,
+        "preis": 427,
+        "gebucht_von": [
+          null
+        ]
+      },
+      {
+        "id": 4,
+        "startort": "Gummersbach",
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0,
+        "km": 553,
+        "km_mit_kosten": 387,
+        "preis": 427,
+        "gebucht_von": [
+          null
+        ]
+      },
+      {
+        "id": 5,
+        "startort": "Gummersbach",
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0,
+        "km": 553,
+        "km_mit_kosten": 387,
+        "preis": 427,
+        "gebucht_von": [
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "vorname": "Merve",
+    "nachname": "Eser",
+    "automodell": [
+      {
+        "pid": 200,
+        "automodell": "Porsche",
+        "preis1": 40,
+        "preis2": 50
+      }
+    ],
+    "angebote": [
+      {
+        "id": 1,
+        "startort": "Köln",
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0
+      },
+      {
+        "id": 2,
+        "startort": "Gummersbach",
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0,
+        "km": 553,
+        "km_mit_kosten": 387,
+        "preis": 437,
+        "gebucht_von": [
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "vorname": "Feyza",
+    "nachname": "Keles",
+    "automodell": [
+      {
+        "pid": 300,
+        "automodell": "VW",
+        "preis1": 30,
+        "preis2": 40
+      }
+    ],
+    "angebote": [
+      {
+        "id": 1,
+        "startort": "Köln",
+        "zielort": "Hamburg",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0
+      },
+      {
+        "id": 2,
+        "startort": "Gummersbach",
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0,
+        "km": 553,
+        "km_mit_kosten": 387,
+        "preis": 427,
+        "gebucht_von": [
+          null
+        ]
+      }
+    ]
+  }
+]
