@@ -132,9 +132,9 @@ app.post('/anbieter/:id/angebote', (req, res) => {
 app.get('/angebote', (req, res) => {
 
     axios.get(`https://myseatmate.herokuapp.com/angebote`, { 
-        startort: req.query.startort,
+       params: { startort: req.query.startort,
         zielort: req.query.zielort, 
-        datum: req.query.datum
+        datum: req.query.datum}
         })
         .then(function (response) {
             // console.log(response.data.datum);
