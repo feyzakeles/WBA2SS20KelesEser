@@ -9,7 +9,7 @@ module.exports = {
 
 //POST Neue Angebot erstellen
 function postAngebote(req, res){
-    distance.apiKey = 'AIzaSyCkp4sq3O75LFS8sk38RpP2Z9i_WVfdsUM'; 
+    distance.apiKey = '...'; 
     var userid = parseInt(req.params.id);
     var automodell = "SELECT * FROM car_sharing.Anbieter INNER JOIN car_sharing.Automodelle ON Anbieter.Automodelle_Automodell_id = Automodell_id INNER JOIN car_sharing.preiskategorie ON Automodelle.preiskategorie_pid = pid Where Anbieter_id = ?;"; 
     distance.get(
