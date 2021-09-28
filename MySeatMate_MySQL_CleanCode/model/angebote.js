@@ -4,7 +4,7 @@ var distance = require('google-distance');
 class Angebot {
 
     static save(startort, zielort, datum, sitzanzahl, verfügbar, besetzt, id){
-      distance.apiKey = 'AIzaSyCkp4sq3O75LFS8sk38RpP2Z9i_WVfdsUM';
+      distance.apiKey = '...';
       let automodell = `SELECT * FROM car_sharing.Anbieter INNER JOIN car_sharing.Automodelle ON Anbieter.Automodelle_Automodell_id = Automodell_id INNER JOIN car_sharing.preiskategorie ON Automodelle.preiskategorie_pid = pid Where Anbieter_id = ${id};`;
       distance.get(
         {
