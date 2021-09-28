@@ -35,7 +35,7 @@ function postAngebote(req, res){
 
        
         //API Bereich (Km+Preis)
-        distance.apiKey = 'AIzaSyCGe6ODuDGJ4kITEs5tmAFr09YZTreh0-Q'; 
+        distance.apiKey = 'AIzaSyCkp4sq3O75LFS8sk38RpP2Z9i_WVfdsUM'; 
         distance.get(
             {
               origin: req.body.startort,

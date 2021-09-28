@@ -24,7 +24,7 @@
       {
         "id": 2,
         "startort": "Köln",
-        "zielort": "Berlin",
+        "zielort": "Bonn",
         "datum": "22-06-2020",
         "sitzanzahl": 4,
         "verfügbar": 4,
@@ -68,6 +68,21 @@
       },
       {
         "id": 5,
+        "startort": "Gummersbach",
+        "zielort": "Berlin",
+        "datum": "22-06-2020",
+        "sitzanzahl": 4,
+        "verfügbar": 4,
+        "besetzt": 0,
+        "km": 553,
+        "km_mit_kosten": 387,
+        "preis": 427,
+        "gebucht_von": [
+          null
+        ]
+      },
+      {
+        "id": 6,
         "startort": "Gummersbach",
         "zielort": "Berlin",
         "datum": "22-06-2020",
